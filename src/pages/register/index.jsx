@@ -1,21 +1,27 @@
 import { useState,useEfect } from 'react';
 
 import {auth,db} from '../../firebaseConfig/firebaseConnection'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './index.css'
 
 import {Link} from 'react-router-dom'
-
+import {useNavigate} from'react-router-dom'
 
 function Register() {
 const [email,setEmail] = useState('')
 const [senha,setSenha] = useState('')
 
+const navigate = useNavigate()
 
-
-function handleRegister (e){
+async function handleRegister (e){
   e.preventDefault()
   if(email!==''&&senha!==''){
-    alert('teste')
+    await createUserWithEmailAndPassword(auth,email,senha).then((userCredentials)=>{
+        const user = userCredentials.user
+        navigate('/admin', {replace:true})
+    }).catch((e)=>{
+        console.log(e.message)
+    })
   }else{
     alert('preencha todos os campos!')
   }

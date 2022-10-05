@@ -18,7 +18,8 @@ async function handleLogin (e){
   e.preventDefault()
   if(email!==''&&senha!==''){
     await signInWithEmailAndPassword(auth,email,senha).then((userCredentials)=>{
-
+      const user =userCredentials.user
+      navigate('/admin',{replace:true})
     }      
     ).catch((e)=>{
       console.log(e.message)

@@ -4,6 +4,8 @@ import Home from '../pages/Home';
 import Register from "../pages/register";
 import Admin from "../pages/admin";
 
+import Private from "./Private";
+
 function RoutesApp(){
 
     return(
@@ -12,7 +14,7 @@ function RoutesApp(){
              
             <Route path="/register" element={<Register/>}/>
 
-            <Route path="/admin" element={<Admin/>}/>
+            <Route path="/admin" element={<Private> <Admin/> </Private>}/>
                 
         </Routes>
     )
