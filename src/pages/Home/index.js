@@ -1,21 +1,30 @@
 import { useState,useEfect } from 'react';
 
 import {auth,db} from '../../firebaseConfig/firebaseConnection'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import './Home.css'
 
 import {Link} from 'react-router-dom'
-
+import {useNavigate} from 'react-router-dom'
 
 function Home() {
 const [email,setEmail] = useState('')
 const [senha,setSenha] = useState('')
 
+const navigate = useNavigate()
 
-
-function handleLogin (e){
+async function handleLogin (e){
   e.preventDefault()
   if(email!==''&&senha!==''){
-    alert('teste')
+    await signInWithEmailAndPassword(auth,email,senha).then((userCredentials)=>{
+
+    }      
+    ).catch((e)=>{
+      console.log(e.message)
+    }
+
+    )
   }else{
     alert('preencha todos os campos!')
   }
